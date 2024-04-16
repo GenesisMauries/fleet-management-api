@@ -1,12 +1,13 @@
 package com.example.fleet.controllers;
 
+import org.springframework.data.domain.PageRequest;
 import com.example.fleet.models.TaxiModel;
 import com.example.fleet.services.TaxiService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 
-import java.util.ArrayList;
-import java.util.Optional;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/taxi")
@@ -15,23 +16,24 @@ public class TaxiController {
     TaxiService taxiService;
 
     @GetMapping()
-    public ArrayList<TaxiModel> getTaxis(){
-        return taxiService.getTaxis();
+    public Page<TaxiModel> getTaxis(Pageable pageable){
+        return taxiService.getTaxis(PageRequest.of(pageable.getPageNumber(), 10));
     }
+
 
     @PostMapping
     public TaxiModel saveTaxi(@RequestBody TaxiModel taxi){
         return this.taxiService.saveTaxi(taxi);
-
     }
+
     @GetMapping( path = "/{id}")
-    public Optional<TaxiModel> getById(@PathVariable("id") Integer id) {
+    public TaxiModel getById(@PathVariable("id") Integer id) {
         return this.taxiService.getById(id);
     }
 
     @GetMapping("/query")
-    public ArrayList<TaxiModel> getByPlate(@RequestParam("plate") String plate){
-        return this.taxiService.getByPlate(plate);
+    public Page<TaxiModel> getByPlate(@RequestParam("plate") String plate, Pageable pageable){
+        return this.taxiService.getByPlate(plate, pageable);
     }
 
     @DeleteMapping( path = "/{id}")
@@ -43,6 +45,4 @@ public class TaxiController {
             return "No pudo eliminar el taxi con id" + id;
         }
     }
-
-
 }
