@@ -43,3 +43,5 @@ Esto significa que cuando una solicitud GET
 llega al servidor web para una URL específica,
 la función o método anotado con @GetMapping
 correspondiente será invocado para manejar esa solicitud.
+[Whitelabel Error Page
+  This application has no explicit mapping for /error, so you are seeing this as a fallback.](https://bootcamptoprod.com/spring-boot-no-explicit-mapping-error-handling/#google_vignette)
