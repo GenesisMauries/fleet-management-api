@@ -16,10 +16,11 @@ public class TaxiController {
     TaxiService taxiService;
 
     @GetMapping()
-    public Page<TaxiModel> getTaxis(Pageable pageable){
-        return taxiService.getTaxis(PageRequest.of(pageable.getPageNumber(), 10));
+    public Page<TaxiModel> getTaxis(
+            @RequestParam(name = "pageNumber", defaultValue = "0") int pageNumber,
+            @RequestParam(name = "pageSize", defaultValue = "10") int pageSize) {
+        return taxiService.getTaxis(PageRequest.of(pageNumber, pageSize));
     }
-
 
     @PostMapping
     public TaxiModel saveTaxi(@RequestBody TaxiModel taxi){
