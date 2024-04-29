@@ -55,4 +55,14 @@ correspondiente será invocado para manejar esa solicitud.
 - URL: GET http://localhost:8080/taxi?pageNumber=1&pageSize=10
 - Respuesta esperada: Lista de taxis paginada con sus respectivos id y placas.
 
-### 
+### GET /taxi/plate
+
+- URL : GET http://localhost:8080/taxi/plate/{plate}
+- Reemplaza {plate} con la placa del taxi que deseas buscar
+- Respuesta esperada: objeto JSON que representa ese taxi, con un código de estado 200 (OK)
+
+### GET /taxi/{id}
+
+- URL : GET http://localhost:8080/taxi/{id}
+- Reemplaza {id} con el id del taxi que deseas buscar.
+- Respuesta esperada: objeto JSON que representa ese taxi, con un código de estado 200 (OK)

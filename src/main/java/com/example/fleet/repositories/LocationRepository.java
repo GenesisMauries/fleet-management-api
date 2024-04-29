@@ -9,4 +9,6 @@ import java.time.LocalDate;
 
 public interface LocationRepository extends JpaRepository<LocationModel, Long> {
     Page<LocationModel> findByTaxiIdAndDateTimeAfterAndDateTimeBefore(Long taxiId, LocalDate startDate, LocalDate endDate, Pageable pageable);
+
+    Page<LocationModel> findAllByTaxiId(Long taxiId, Pageable pageable);
 }

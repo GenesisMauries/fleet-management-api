@@ -44,8 +44,15 @@ public class TaxiService {
     }
 
     public Page<LocationModel> getTaxiLocations(Long taxiId, LocalDate date, Pageable pageable) {
-        LocalDate startDate = date.atStartOfDay().toLocalDate();
-        LocalDate endDate = startDate.plusDays(1);
-        return locationRepository.findByTaxiIdAndDateTimeAfterAndDateTimeBefore(taxiId, startDate, endDate, pageable);
+        if (date != null) {
+            LocalDate startDate = date.atStartOfDay().toLocalDate();
+            LocalDate endDate = startDate.plusDays(1);
+            return locationRepository.findByTaxiIdAndDateTimeAfterAndDateTimeBefore(taxiId, startDate, endDate, pageable);
+        } else {
+            // si no hay fecha devuelve todas las ubicaciones del taxi
+            return locationRepository.findAllByTaxiId(taxiId, pageable);
+            // O si tienes otro método específico para obtener todas las ubicaciones del taxi sin considerar la fecha:
+            // return locationRepository.findAllByTaxiId(taxiId, pageable);
+        }
     }
 }
