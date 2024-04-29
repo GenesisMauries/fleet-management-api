@@ -5,8 +5,7 @@ import com.example.fleet.models.TaxiModel;
 import com.example.fleet.repositories.LocationRepository;
 import com.example.fleet.repositories.TaxiRepository;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.*;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
@@ -49,10 +48,9 @@ public class TaxiService {
             LocalDate endDate = startDate.plusDays(1);
             return locationRepository.findByTaxiIdAndDateTimeAfterAndDateTimeBefore(taxiId, startDate, endDate, pageable);
         } else {
-            // si no hay fecha devuelve todas las ubicaciones del taxi
+
             return locationRepository.findAllByTaxiId(taxiId, pageable);
-            // O si tienes otro método específico para obtener todas las ubicaciones del taxi sin considerar la fecha:
-            // return locationRepository.findAllByTaxiId(taxiId, pageable);
         }
     }
+
 }

@@ -4,10 +4,7 @@ import com.example.fleet.models.LocationModel;
 import com.example.fleet.models.TaxiModel;
 import com.example.fleet.services.TaxiService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.PageRequest;
-import org.springframework.data.domain.Pageable;
-
+import org.springframework.data.domain.*;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -68,12 +65,8 @@ public class TaxiController {
             @PathVariable("id") Long taxiId,
             @RequestParam(name = "date", required = false) @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate date,
             Pageable pageable) {
-        if (date != null) {
-            return taxiService.getTaxiLocations(taxiId, date, pageable);
-        } else {
-            // sin fecha devolver todas las ubicaciones del taxi
-            return taxiService.getTaxiLocations(taxiId, null, pageable);
-        }
+        return taxiService.getTaxiLocations(taxiId, date, pageable);
     }
+
 
 }
