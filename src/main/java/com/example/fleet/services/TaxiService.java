@@ -1,16 +1,23 @@
 package com.example.fleet.services;
 
+import com.example.fleet.models.LocationModel;
 import com.example.fleet.models.TaxiModel;
+import com.example.fleet.repositories.LocationRepository;
 import com.example.fleet.repositories.TaxiRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDate;
+
 @Service
 public class TaxiService {
     @Autowired
-    TaxiRepository taxiRepository;
+    private TaxiRepository taxiRepository;
+
+    @Autowired
+    private LocationRepository locationRepository;
 
     public Page<TaxiModel> getTaxis(Pageable pageable) {
         return taxiRepository.findAll(pageable);
@@ -34,5 +41,11 @@ public class TaxiService {
             return true;
         }
         return false;
+    }
+
+    public Page<LocationModel> getTaxiLocations(Long taxiId, LocalDate date, Pageable pageable) {
+        LocalDate startDate = date.atStartOfDay().toLocalDate();
+        LocalDate endDate = startDate.plusDays(1);
+        return locationRepository.findByTaxiIdAndDateTimeAfterAndDateTimeBefore(taxiId, startDate, endDate, pageable);
     }
 }

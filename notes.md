@@ -43,3 +43,16 @@ Esto significa que cuando una solicitud GET
 llega al servidor web para una URL específica,
 la función o método anotado con @GetMapping
 correspondiente será invocado para manejar esa solicitud.
+
+
+### GET /taxi
+
+- URL: GET http://localhost:8080/taxi
+- Respuesta esperada: Lista de taxis paginada con sus respectivos id y placas.
+
+### GET con diferentes valores para los parámetros de paginación `pageNumber` y `pageSize`
+
+- URL: GET http://localhost:8080/taxi?pageNumber=1&pageSize=10
+- Respuesta esperada: Lista de taxis paginada con sus respectivos id y placas.
+
+### 
