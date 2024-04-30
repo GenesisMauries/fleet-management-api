@@ -1,15 +1,11 @@
 package com.example.fleet.controllers;
 
-import com.example.fleet.models.LocationModel;
 import com.example.fleet.models.TaxiModel;
 import com.example.fleet.services.TaxiService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.*;
-import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-
-import java.time.LocalDate;
 
 @RestController
 @RequestMapping("/taxi")
@@ -24,12 +20,8 @@ public class TaxiController {
         return taxiService.getTaxis(PageRequest.of(pageNumber, pageSize));
     }
 
-    @PostMapping
-    public TaxiModel saveTaxi(@RequestBody TaxiModel taxi){
-        return this.taxiService.saveTaxi(taxi);
-    }
 
-    @GetMapping( path = "/{id}")
+    @GetMapping( path = "/id/{id}")
     public TaxiModel getById(@PathVariable("id") Integer id) {
         return this.taxiService.getById(id);
     }
@@ -48,25 +40,5 @@ public class TaxiController {
             return ResponseEntity.notFound().build();
         }
     }
-
-    @DeleteMapping( path = "/{id}")
-    public String deleteById(@PathVariable("id") Integer id){
-        boolean ok = this.taxiService.deleteTaxi(id);
-        if (ok){
-            return "Se eliminó el taxi con id " + id;
-        }else{
-            return "No pudo eliminar el taxi con id" + id;
-        }
-    }
-
-
-    @GetMapping("/{id}/locations")
-    public Page<LocationModel> getTaxiLocations(
-            @PathVariable("id") Long taxiId,
-            @RequestParam(name = "date", required = false) @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate date,
-            Pageable pageable) {
-        return taxiService.getTaxiLocations(taxiId, date, pageable);
-    }
-
 
 }

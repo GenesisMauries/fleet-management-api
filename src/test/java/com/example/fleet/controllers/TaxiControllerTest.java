@@ -7,6 +7,7 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
+import org.mockito.Mockito;
 import org.mockito.junit.jupiter.MockitoExtension;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageImpl;
@@ -45,6 +46,10 @@ class TaxiControllerTest {
         assertEquals(expectedPage, result);
         verify(taxiService, times(1)).getTaxis(PageRequest.of(pageNumber, pageSize));
     }
+
+    // validar ruta /taxi MOCK MVC
+    // MOCK BEAN mockear capa o solo clase
+
 }
 
 

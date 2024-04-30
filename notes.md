@@ -57,12 +57,14 @@ correspondiente será invocado para manejar esa solicitud.
 
 ### GET /taxi/plate
 
-- URL : GET http://localhost:8080/taxi/{plate}
+- URL : GET http://localhost:8080/taxi/plate/{plate}
 - Reemplaza {plate} con la placa del taxi que deseas buscar
 - Respuesta esperada: objeto JSON que representa ese taxi, con un código de estado 200 (OK)
 
 ### GET /taxi/{id}
 
-- URL : GET http://localhost:8080/taxi/{id}
+- URL : GET http://localhost:8080/taxi/id/{id}
 - Reemplaza {id} con el id del taxi que deseas buscar.
 - Respuesta esperada: objeto JSON que representa ese taxi, con un código de estado 200 (OK)
+
+**Query SQL para obtener la ultima trayectorio COMPOSICION**
