@@ -57,7 +57,7 @@ correspondiente será invocado para manejar esa solicitud.
 
 ### GET /taxi/plate
 
-- URL : GET http://localhost:8080/taxi/plate/{plate}
+- URL : GET http://localhost:8080/taxi/{plate}
 - Reemplaza {plate} con la placa del taxi que deseas buscar
 - Respuesta esperada: objeto JSON que representa ese taxi, con un código de estado 200 (OK)
 
