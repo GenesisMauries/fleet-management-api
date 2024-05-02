@@ -59,5 +59,22 @@ public class TestTaxiController {
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$.content", hasSize(5)));
     }
+    @Test
+    public void testGetById() throws Exception {
+        // Mock data
+        TaxiModel taxi = new TaxiModel();
+        taxi.setId(123);
+        taxi.setPlate("TEST-123");
+
+        // Mock del servicio
+        given(taxiService.getById(123)).willReturn(taxi);
+
+        // request
+        mockMvc.perform(get("/taxi/id/123")
+                        .contentType(MediaType.APPLICATION_JSON))
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("$.id").value(123))
+                .andExpect(jsonPath("$.plate").value("TEST-123"));
+    }
 }
 
