@@ -78,7 +78,7 @@ public class TestTaxiController {
                 .andExpect(jsonPath("$.plate").value("TEST-123"));
     }
     @Test
-    public void testGetTaxiByPlate() throws Exception {
+    public void testGetTaxiByPlate() throws Exception  {
         // Mock data
         TaxiModel taxi = new TaxiModel();
         taxi.setId(123);
