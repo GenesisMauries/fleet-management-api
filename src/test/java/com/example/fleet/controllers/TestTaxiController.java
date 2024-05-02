@@ -19,6 +19,7 @@ import static org.springframework.test.web.servlet.request.MockMvcRequestBuilder
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
 
+import java.util.Collections;
 import java.util.List;
 import java.util.ArrayList;
 
@@ -73,6 +74,24 @@ public class TestTaxiController {
         mockMvc.perform(get("/taxi/id/123")
                         .contentType(MediaType.APPLICATION_JSON))
                 .andExpect(status().isOk())
+                .andExpect(jsonPath("$.id").value(123))
+                .andExpect(jsonPath("$.plate").value("TEST-123"));
+    }
+    @Test
+    public void testGetTaxiByPlate() throws Exception {
+        // Mock data
+        TaxiModel taxi = new TaxiModel();
+        taxi.setId(123);
+        taxi.setPlate("TEST-123");
+
+        // Mock del servicio
+        given(taxiService.getByPlate(any(String.class), any(PageRequest.class)))
+                .willReturn(new PageImpl<>(Collections.singletonList(taxi))); // lista inmutable
+
+        // Request
+        mockMvc.perform(get("/taxi/plate/TEST-123"))
+                .andExpect(status().isOk())
+                .andExpect(content().contentType(MediaType.APPLICATION_JSON))
                 .andExpect(jsonPath("$.id").value(123))
                 .andExpect(jsonPath("$.plate").value("TEST-123"));
     }
